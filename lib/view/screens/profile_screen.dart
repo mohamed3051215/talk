@@ -24,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late UserModel? _userModel;
-  final FirestoreService _auth = FirestoreService();
+
   final User? user = FirebaseAuth.instance.currentUser;
   late String tag;
   bool loading = true;
@@ -38,7 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       loading = true;
     });
-    _auth.getUserModelFromId(widget.user.uid).then((UserModel userModel) {
+    FirestoreService.getUserModelFromId(widget.user.uid)
+        .then((UserModel userModel) {
       setState(() {
         _userModel = userModel;
         tag = getRandomString(3);
@@ -96,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+        backgroundColor: bgColor,
         appBar: AppBar(
           title: Logo(),
           centerTitle: true,

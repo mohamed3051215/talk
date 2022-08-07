@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:chat_app/core/constants/agora_keys.dart';
 import 'package:chat_app/core/constants/colors.dart';
 import 'package:chat_app/core/controllers/home_screen_controller.dart';
+import 'package:chat_app/core/service/firestore_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,15 +31,18 @@ class VideoCallScreen extends StatefulWidget {
 class _VideoCallScreenState extends State<VideoCallScreen> {
   late RtcEngine engine;
   int? remoteId;
-  bool localUserJoined = false;
+  bool localUserJoined = false, voiceOn = true, videoOn = true;
   String token = "";
   String? channelName;
-  bool voiceOn = true;
-  bool videoOn = true;
-
+  final ChatController chatController = Get.find<ChatController>();
   @override
   void initState() {
-    initAgora();
+    _initAgora();
+    _setTimer();
+    super.initState();
+  }
+
+  _setTimer() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         FirebaseFirestore.instance
@@ -52,10 +55,9 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
         printInfo(info: "Local User joined : $localUserJoined");
       }
     });
-    super.initState();
   }
 
-  generareRandomString(int n) {
+  _generareRandomString(int n) {
     var rand = Random();
     var code = StringBuffer();
     for (var i = 0; i < n; i++) {
@@ -64,11 +66,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     return code.toString();
   }
 
-  initAgora() async {
-    await [Permission.microphone, Permission.camera].request();
-    engine = await RtcEngine.create(agoraAppID);
-    await engine.enableVideo();
-
+  _setAgoraEventHandler() {
     engine.setEventHandler(
         RtcEngineEventHandler(userJoined: (int uid, int elapsed) {
       printInfo(
@@ -104,39 +102,48 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     }, tokenPrivilegeWillExpire: (String? token) {
       printInfo(info: "token will expire : $token");
     }));
+  }
 
-    final ChatController chatController = Get.find<ChatController>();
-    final DocumentSnapshot<Map<String, dynamic>> dataCall =
-        await FirebaseFirestore.instance
-            .collection("chat")
-            .doc(chatController.chatId)
-            .get();
-    final Map<String, dynamic> firebaseData = dataCall.data()!;
-    if (firebaseData.keys.toList().contains("token") &&
-        firebaseData.keys.toList().contains("room") &&
-        firebaseData['room'] != null &&
-        firebaseData["token"] != null &&
-        firebaseData["token"].toString().isNotEmpty &&
-        firebaseData["room"].toString().isNotEmpty) {
-      printInfo(info: "Room Already created and now starting to get the token");
-      setState(() {
-        channelName = firebaseData['room'];
-        token = firebaseData['token'];
-      });
-      await engine.leaveChannel();
-      await engine.joinChannel(token, channelName!, null, 0);
-      return;
+  _askForPermissions() async {
+    await [Permission.microphone, Permission.camera].request();
+  }
+
+  _setEngineAndEnableVideo() async {
+    engine = await RtcEngine.create(agoraAppID);
+    await engine.enableVideo();
+  }
+
+  _initAgora() async {
+    await _askForPermissions();
+    await _setEngineAndEnableVideo();
+    _setAgoraEventHandler();
+
+    final firebaseData = await FirestoreService.getChat(chatController.chatId);
+    if (_roomExists(firebaseData)) {
+      return _joinRoom(firebaseData);
     }
+    _createAndJoinRoom();
+  }
+
+  _joinRoom(firebaseData) async {
     setState(() {
-      channelName = generareRandomString(50);
+      channelName = firebaseData['room'];
+      token = firebaseData['token'];
+    });
+    await engine.leaveChannel();
+    await engine.joinChannel(token, channelName!, null, 0);
+    return;
+  }
+
+  _createAndJoinRoom() async {
+    setState(() {
+      channelName = _generareRandomString(50);
     });
 
     String tokens = await updateToken(
         channelName!, Get.find<HomeScreenController>().userModel!.id);
-    FirebaseFirestore.instance
-        .collection("chat")
-        .doc(chatController.chatId)
-        .set({"token": tokens, "room": channelName});
+    FirestoreService.updateChat(
+        chatController.chatId, {"token": tokens, "room": channelName});
     setState(() {
       token = tokens;
     });
@@ -145,7 +152,16 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     await engine.joinChannel(token, channelName!, null, 0);
   }
 
-  updateToken(String channelName, String account) async {
+  bool _roomExists(firebaseData) {
+    return firebaseData.keys.toList().contains("token") &&
+        firebaseData.keys.toList().contains("room") &&
+        firebaseData['room'] != null &&
+        firebaseData["token"] != null &&
+        firebaseData["token"].toString().isNotEmpty &&
+        firebaseData["room"].toString().isNotEmpty;
+  }
+
+  Future<String> updateToken(String channelName, String account) async {
     final Uri url = Uri.parse(
         "https://drf-watchmate.herokuapp.com/watch/token/?app_id=ff6db955480642b0bf9292a13dcd0ea3&APC=9f0e95a4281c453e8d2f672da396faf9&channel_name=" +
             channelName +
@@ -278,4 +294,3 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     );
   }
 }
-

@@ -97,7 +97,7 @@ class OneSignalService {
             .doc(additionalData['uid'])
             .get();
         UserModel userModel =
-            await FirestoreService().getUserModelFromId(additionalData['uid']);
+            await FirestoreService.getUserModelFromId(additionalData['uid']);
         Get.put(ChatController(additionalData['uid']));
 
         Get.to(ChatScreen());
