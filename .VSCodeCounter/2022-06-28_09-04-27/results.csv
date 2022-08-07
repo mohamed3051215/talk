@@ -1,0 +1,71 @@
+"filename", "language", "Dart", "comment", "blank", "total"
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\bindings\splash_binding.dart", "Dart", 8, 0, 2, 10
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\agora_keys.dart", "Dart", 4, 0, 1, 5
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\colors.dart", "Dart", 9, 0, 2, 11
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\country_data.dart", "Dart", 288, 0, 1, 289
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\fake_data.dart", "Dart", 90, 1, 6, 97
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\fonts.dart", "Dart", 22, 0, 1, 23
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\images.dart", "Dart", 4, 0, 2, 6
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\one_signal_keys.dart", "Dart", 3, 0, 1, 4
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\constants\titles.dart", "Dart", 8, 0, 2, 10
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\chat_controller.dart", "Dart", 197, 7, 27, 231
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\home_screen_controller.dart", "Dart", 110, 0, 9, 119
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\image_picker_controller.dart", "Dart", 70, 0, 5, 75
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\login_controller.dart", "Dart", 44, 0, 8, 52
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\profile_controller.dart", "Dart", 58, 2, 10, 70
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\sign_up_controller.dart", "Dart", 109, 0, 13, 122
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\splash_controller.dart", "Dart", 20, 0, 4, 24
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\tab_controller.dart", "Dart", 11, 0, 3, 14
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\controllers\user_controller.dart", "Dart", 28, 0, 4, 32
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\enums\auth_operation.dart", "Dart", 1, 0, 1, 2
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\enums\call_state.dart", "Dart", 1, 0, 1, 2
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\enums\call_type.dart", "Dart", 1, 0, 0, 1
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\enums\message_type.dart", "Dart", 1, 0, 1, 2
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\helpers\message_type_transformer.dart", "Dart", 29, 0, 4, 33
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\helpers\random_tag.dart", "Dart", 5, 0, 3, 8
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\helpers\show_error.dart", "Dart", 22, 0, 2, 24
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\models\call.dart", "Dart", 13, 0, 3, 16
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\models\contact.dart", "Dart", 11, 0, 4, 15
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\models\message.dart", "Dart", 42, 0, 4, 46
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\models\user.dart", "Dart", 22, 0, 2, 24
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\auth_service.dart", "Dart", 103, 2, 6, 111
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\cache_service.dart", "Dart", 69, 0, 9, 78
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\firestore_service.dart", "Dart", 108, 0, 12, 120
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\one_signal_service.dart", "Dart", 169, 2, 15, 186
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\storage_service.dart", "Dart", 27, 0, 5, 32
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\core\service\user_status_service.dart", "Dart", 21, 0, 5, 26
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\main.dart", "Dart", 28, 0, 6, 34
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\chat_screen.dart", "Dart", 229, 1, 11, 241
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\controlling_screen.dart", "Dart", 19, 0, 3, 22
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\home_screen.dart", "Dart", 299, 0, 5, 304
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\login_screen.dart", "Dart", 75, 0, 2, 77
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\otp_check_screen.dart", "Dart", 88, 0, 4, 92
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\pick_image.dart", "Dart", 153, 0, 4, 157
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\profile_screen.dart", "Dart", 210, 0, 8, 218
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\settings_screen.dart", "Dart", 11, 0, 5, 16
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\sign_up_screen.dart", "Dart", 92, 0, 2, 94
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\splash_screen.dart", "Dart", 124, 0, 3, 127
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\video_call_screen.dart", "Dart", 91, 186, 23, 300
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\view_image_screen.dart", "Dart", 37, 2, 2, 41
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\view_video_screen.dart", "Dart", 119, 8, 6, 133
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\screens\voice_call_screen.dart", "Dart", 11, 0, 4, 15
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\calls_widget.dart", "Dart", 127, 0, 6, 133
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\circle_button_for_call.dart", "Dart", 38, 0, 4, 42
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\circular_button.dart", "Dart", 39, 0, 3, 42
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\contact_widget.dart", "Dart", 174, 0, 10, 184
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\custom_alert_dialog.dart", "Dart", 40, 0, 2, 42
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\custom_back_button.dart", "Dart", 15, 0, 3, 18
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\custom_text.dart", "Dart", 44, 0, 2, 46
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\custom_text_field.dart", "Dart", 34, 0, 2, 36
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\filled_button.dart", "Dart", 33, 0, 4, 37
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\loading_dialog.dart", "Dart", 16, 0, 3, 19
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\logo.dart", "Dart", 45, 0, 5, 50
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\page_ciew_circle.dart", "Dart", 21, 0, 3, 24
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\phone_text_field.dart", "Dart", 86, 0, 5, 91
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\general widgets\setting_panel.dart", "Dart", 89, 0, 2, 91
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\message collections\audio_widget.dart", "Dart", 283, 4, 20, 307
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\message collections\image_message.dart", "Dart", 83, 0, 4, 87
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\message collections\message_widget.dart", "Dart", 31, 0, 2, 33
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\message collections\text_message.dart", "Dart", 53, 1, 4, 58
+"e:\ssd old partition\mo ayman\dart\flutter projects\special projects\chat_app\lib\view\widgets\message collections\video_message.dart", "Dart", 129, 0, 9, 138
+"Total", "-", 4694, 216, 359, 5269
