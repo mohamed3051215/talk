@@ -1,0 +1,1 @@
+enum CallType{videoCall, voiceCall}

@@ -1,0 +1,1 @@
+enum AuthOperation { login, signUp }
