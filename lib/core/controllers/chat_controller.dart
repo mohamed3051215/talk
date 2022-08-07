@@ -38,7 +38,7 @@ class ChatController extends GetxController {
   ChatController(this.userId);
   RxList<Message> messages = <Message>[].obs;
   final UserStatuesService _userStatuesService = UserStatuesService();
-  final FirestoreService _firestoreService = FirestoreService();
+
   RxBool isSend = false.obs;
   late String chatId;
   final CacheService _cacheService = CacheService();
@@ -190,7 +190,7 @@ class ChatController extends GetxController {
         text: '',
         type: MessageType.audio,
         link: null);
-    _firestoreService.sendMessage(message, userModel, chatId);
+    FirestoreService.sendMessage(message, userModel, chatId);
     OneSignalService().sendMessage(userModel: userModel, message: message);
   }
 
@@ -213,7 +213,7 @@ class ChatController extends GetxController {
         date: DateTime.now(),
         from: Get.find<HomeScreenController>().userModel!.id,
         to: userModel.id);
-    _firestoreService.sendMessage(message, userModel, chatId);
+    FirestoreService.sendMessage(message, userModel, chatId);
     await OneSignalService()
         .sendMessage(userModel: userModel, message: message);
   }

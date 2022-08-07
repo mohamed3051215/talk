@@ -12,12 +12,13 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 
 class FirestoreService {
-  final CollectionReference users =
-      FirebaseFirestore.instance.collection("users");
-  final StorageService _service = StorageService();
-  addUser(String username, String phoneNumber, User user, String password,
-      String image, String onesignalId) async {
+  FirebaseFirestore instance = FirebaseFirestore.instance;
+
+  static addUser(String username, String phoneNumber, User user,
+      String password, String image, String onesignalId) async {
     String id = user.uid;
+    final CollectionReference users =
+        FirebaseFirestore.instance.collection("users");
     final Map<String, dynamic> data = {
       "username": username,
       "password": password,
@@ -31,7 +32,7 @@ class FirestoreService {
     await users.doc(id).set(data);
   }
 
-  connect() {
+  static connect() {
     final User? user = Get.find<UserController>().user;
     if (user != null) {
       FirebaseFirestore.instance
@@ -41,7 +42,7 @@ class FirestoreService {
     }
   }
 
-  disconnect() {
+  static disconnect() {
     final User? user = Get.find<UserController>().user;
     if (user != null) {
       FirebaseFirestore.instance
@@ -51,24 +52,30 @@ class FirestoreService {
     }
   }
 
-  editName(String name) async {
+  static editName(String name) async {
     if (FirebaseAuth.instance.currentUser != null && name.isNotEmpty) {
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection("users");
       await users
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({"username": name});
     }
   }
 
-  editPassword(String password) async {
+  static editPassword(String password) async {
     if (FirebaseAuth.instance.currentUser != null && password.isNotEmpty) {
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection("users");
       await users
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({"password": password});
     }
   }
 
-  Future<UserModel> getUserModelFromId(String id) async {
+  static Future<UserModel> getUserModelFromId(String id) async {
     try {
+      final CollectionReference users =
+          FirebaseFirestore.instance.collection("users");
       var data = await users.doc(id).get();
       final UserModel _userModel = UserModel(
           active: data["active"],
@@ -80,7 +87,7 @@ class FirestoreService {
       return _userModel;
     } catch (e) {
       showError("User Not Found in firestore service");
-      printError(info: e.toString());
+      print(e.toString());
       return UserModel(
           oneSignalID: null,
           active: false,
@@ -91,14 +98,18 @@ class FirestoreService {
     }
   }
 
-  changeImage(File file) async {
+  static changeImage(File file) async {
+    final StorageService _service = StorageService();
+    final CollectionReference users =
+        FirebaseFirestore.instance.collection("users");
     final String link = await _service.changeImage(file);
     await users
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({"image": link});
   }
 
-  sendMessage(Message message, UserModel wantedUser, String chatId) async {
+  static sendMessage(
+      Message message, UserModel wantedUser, String chatId) async {
     final Map<String, dynamic> data = message.toJson();
     await FirebaseFirestore.instance
         .collection("chat")
@@ -108,14 +119,14 @@ class FirestoreService {
         .set(data);
   }
 
-  storeOneSignalKey(String key, String userId) async {
+  static storeOneSignalKey(String key, String userId) async {
     await FirebaseFirestore.instance
         .collection("users")
         .doc(userId)
         .update({"onesignal id": key});
   }
 
-  updateToken(String token) {
+  static updateToken(String token) {
     final User? user = Get.find<UserController>().user;
     if (user != null) {
       FirebaseFirestore.instance
@@ -123,5 +134,18 @@ class FirestoreService {
           .doc(user.uid)
           .update({"token": token});
     }
+  }
+
+  static Future<Map<String, dynamic>> getChat(String chatId) async {
+    final dataCall =
+        await FirebaseFirestore.instance.collection("chat").doc(chatId).get();
+    return dataCall.data()!;
+  }
+
+  static void updateChat(String chatId, Map<String, dynamic> data) async {
+    await FirebaseFirestore.instance
+        .collection("chat")
+        .doc(chatId)
+        .update(data);
   }
 }

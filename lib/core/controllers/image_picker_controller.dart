@@ -17,7 +17,7 @@ class ImagePickerController extends GetxController {
   final UserStatuesService _userStatuesService = UserStatuesService();
   ImagePicker _picker = ImagePicker();
   final StorageService _storageService = StorageService();
-  FirestoreService _serviceAuth = FirestoreService();
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -59,7 +59,7 @@ class ImagePickerController extends GetxController {
     Get.dialog(LoadingDialog());
     final SignUpController _signUpController = Get.find<SignUpController>();
     final String link = await _storageService.storeUserImage(path!.value);
-    await _serviceAuth.addUser(
+    await FirestoreService.addUser(
         _signUpController.username.text,
         _signUpController.dialCodee + _signUpController.phone.text,
         FirebaseAuth.instance.currentUser!,

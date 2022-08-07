@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController {
   final Rx<TextEditingController> nameController = TextEditingController().obs;
-  final FirestoreService _serviceAuth = FirestoreService();
+
   ImagePicker _picker = ImagePicker();
   // final StorageService _storageService = StorageService();
   RxString? path;
@@ -25,7 +25,7 @@ class ProfileController extends GetxController {
 
   updateUser() async {
     if (nameController.value.text.length > 3) {
-      _serviceAuth.editName(nameController.value.text);
+      FirestoreService.editName(nameController.value.text);
     } else
       showError("Invalid name, Please try again with  real name");
   }
@@ -62,7 +62,7 @@ class ProfileController extends GetxController {
   done() async {
     Get.dialog(LoadingDialog());
 
-    await _serviceAuth.changeImage(File(path!.value));
+    await FirestoreService.changeImage(File(path!.value));
 
     Get.back();
   }

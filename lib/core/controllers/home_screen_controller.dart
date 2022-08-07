@@ -31,7 +31,7 @@ class HomeScreenController extends GetxController {
   StreamSubscription? chatSubscription;
   final UserStatuesService _userStatuesService = UserStatuesService();
   RxList<ChatContact> contacts = <ChatContact>[].obs;
-  final FirestoreService _serviceAuth = FirestoreService();
+
   final List<String> allUsersChatId = <String>[];
   RxList<Map<String, Stream<DatabaseEvent>>> activeUsers =
       <Map<String, Stream<DatabaseEvent>>>[].obs;
@@ -74,7 +74,7 @@ class HomeScreenController extends GetxController {
     }
     await OneSignal.shared.setExternalUserId(userModel!.id);
     OneSignal.shared.getDeviceState().then((value) {
-      _serviceAuth.storeOneSignalKey(value!.userId!, userModel!.id);
+      FirestoreService.storeOneSignalKey(value!.userId!, userModel!.id);
     });
   }
 
@@ -107,7 +107,7 @@ class HomeScreenController extends GetxController {
       activeUsers.clear();
       event.docChanges.forEach((e) async {
         final UserModel userModels =
-            await _serviceAuth.getUserModelFromId(e.doc["uid"]);
+            await FirestoreService.getUserModelFromId(e.doc["uid"]);
         ChatContact contact =
             ChatContact(contactUser: userModels, messagesNotSeen: 0);
         contacts.add(contact);
@@ -134,7 +134,7 @@ class HomeScreenController extends GetxController {
 
   _setUserModel() async {
     final User _user = FirebaseAuth.instance.currentUser!;
-    userModel = await _serviceAuth.getUserModelFromId(_user.uid);
+    userModel = await FirestoreService.getUserModelFromId(_user.uid);
   }
 
   goSettings() {
