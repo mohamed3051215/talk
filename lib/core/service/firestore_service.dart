@@ -148,4 +148,12 @@ class FirestoreService {
         .doc(chatId)
         .update(data);
   }
+
+  static Future<void> clearTokenAndRoomId(chatId) async {
+    await FirebaseFirestore.instance
+        .collection("chat")
+        .doc(chatId)
+        .update({"token": null, "room": null});
+    return;
+  }
 }
