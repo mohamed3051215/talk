@@ -1,5 +1,5 @@
 import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fake_data.dart';
+
 import 'package:chat_app/core/constants/fonts.dart';
 import 'package:chat_app/core/controllers/chat_controller.dart';
 import 'package:chat_app/core/models/message.dart';
@@ -13,7 +13,9 @@ import 'package:get/get.dart';
 import '../../core/enums/call_type.dart';
 
 class ChatScreen extends StatefulWidget {
-  ChatScreen({Key? key,}) : super(key: key);
+  ChatScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -68,7 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ],
           title: Container(
-            height: 40,
+            height: 50,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
