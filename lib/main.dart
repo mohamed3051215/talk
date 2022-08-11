@@ -69,9 +69,9 @@ class _MainAppState extends State<MainApp> {
           Get.to(() => VideoCallScreen());
         }
       } else
-        print("hellno0000000000000000 payload null");
+        print("payload is  null");
     } else {
-      print("hellnoooooooooooooooooooooooooooo");
+      print("No notification launched app");
     }
   }
 
