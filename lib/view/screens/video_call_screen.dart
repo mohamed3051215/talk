@@ -189,7 +189,6 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ChatController controller = Get.find<ChatController>();
     return Scaffold(
       backgroundColor: bgColor,
       body: Stack(
@@ -198,7 +197,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
               ? Container(
                   height: Get.height,
                   width: Get.width,
-                  child: Image.network(controller.userModel.image,
+                  child: Image.network(chatController.userModel!.image,
                       fit: BoxFit.cover))
               : Container(),
           remoteId != null && remoteId != ""
@@ -261,12 +260,12 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
                 ),
               )),
           Obx(() => Positioned(
-                left: controller.position.value.dx,
-                top: controller.position.value.dy,
+                left: chatController.position.value.dx,
+                top: chatController.position.value.dy,
                 child: Draggable(
                   onDragUpdate: (DragUpdateDetails details) {
-                    controller.position.value =
-                        controller.position.value + details.delta;
+                    chatController.position.value =
+                        chatController.position.value + details.delta;
                   },
                   feedback: Container(),
                   child: Container(
