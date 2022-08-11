@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:chat_app/core/controllers/chat_controller.dart';
 import 'package:chat_app/core/controllers/home_screen_controller.dart';
+import 'package:chat_app/view/screens/voice_call_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -11,16 +12,19 @@ import 'package:http/http.dart' as http;
 
 import '../../main.dart';
 import '../../view/screens/chat_screen.dart';
+import '../models/user.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'custom_notification_channel_id',
-  'Notification',
-  description: 'notifications from Your App Name.',
+  'custom_notificaon_channel_id',
+  'Notifiaion',
+  description: 'notificationfrom Your App Name.',
   importance: Importance.high,
+  playSound: true,
+  sound: RawResourceAndroidNotificationSound("ringtone1"),
 );
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -47,13 +51,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       message.data['title'],
       message.data["body"],
       NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channelDescription: channel.description,
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
+        android: AndroidNotificationDetails(channel.id, channel.name,
+            channelDescription: channel.description,
+            importance: Importance.max,
+            priority: Priority.high,
+            playSound: true,
+            sound: RawResourceAndroidNotificationSound("ringtone1"),
+            fullScreenIntent: true),
       ),
       payload: json.encode(message.data));
 }
@@ -90,7 +94,9 @@ void setupFcm() {
       goToNextScreen(event.data);
     },
     cancelOnError: false,
-    onDone: () {},
+    onDone: () {
+      print("On Done Called");
+    },
   );
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
@@ -105,6 +111,10 @@ void setupFcm() {
           channelDescription: channel.description,
           importance: Importance.max,
           priority: Priority.high,
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound("ringtone1"),
+          fullScreenIntent: true,
+          visibility: NotificationVisibility.public,
         ),
       ),
       payload: json.encode(message.data),
@@ -118,14 +128,31 @@ Future<void> deleteFcmToken() async {
 
 Future<String> getFcmToken() async {
   String? token = await FirebaseMessaging.instance.getToken();
+  print("Token is : $token");
   return Future.value(token);
 }
 
 void goToNextScreen(Map<String, dynamic> data) {
-  // Get.put<HomeScreenController>(HomeScreenController());
-  print("should go to chat screen");
+  try {
+    print("should go to chat screen");
+    print("data is : " + data["sender data"].toString());
+    Map<String, dynamic> data2 = json.decode(data["sender data"]);
+    UserModel userModel = UserModel.fromJson(data2);
+    Get.put<ChatController>(ChatController(data2["uid"],
+        userModel: userModel, chatId: data2["chatId"]));
+    print("should go to chat screen2");
 
-  Get.put<ChatController>(ChatController(data['sender id']));
-  navigatorKey.currentState!
-      .push(MaterialPageRoute(builder: (context) => ChatScreen()));
+    if (data["type"] == "chat") {
+      navigatorKey.currentState!
+          .push(MaterialPageRoute(builder: (context) => ChatScreen()));
+    } else if (data["type"] == "voicecall") {
+      navigatorKey.currentState!
+          .push(MaterialPageRoute(builder: (context) => VoiceCallScreen()));
+    } else if (data["type"] == "videocall") {
+      navigatorKey.currentState!
+          .push(MaterialPageRoute(builder: (context) => VoiceCallScreen()));
+    }
+  } catch (e) {
+    print("error is : " + e.toString());
+  }
 }
