@@ -49,3 +49,5 @@ app.*.map.json
 # Vscode extenstions related
 /.VSCodeCounter/
 postmanstuff.json
+# Script for editing github commits
+changeauther.sh
