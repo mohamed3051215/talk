@@ -44,7 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel chattingUser = controller.userModel;
+    final UserModel chattingUser = controller.userModel!;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: PreferredSize(
