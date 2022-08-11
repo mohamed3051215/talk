@@ -35,64 +35,65 @@ class HomeScreenController extends GetxController {
   final List<String> allUsersChatId = <String>[];
   RxList<Map<String, Stream<DatabaseEvent>>> activeUsers =
       <Map<String, Stream<DatabaseEvent>>>[].obs;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    // _checkOutNotification();
+    _askForPermissions();
+    await _setUserModel();
+    _setContacts();
+
+    await _userStatuesService.setupMyUser();
+    _setUser();
+    _setTabSettings();
+    await _setOneSignalSettings();
+  }
+
   logOut() async {
     await _auth.signOut();
     Get.put(LoginController());
     Get.to(() => LoginScreen());
   }
 
-  @override
-  Future<void> onInit() async {
-    super.onInit();
-    _checkForMessage();
-    _askForPermissions();
-    await _setUserModel();
-    _setContacts();
-
-    await _userStatuesService.setupMyUser();
+  _setUser() {
     Get.put(UserController(user: FirebaseAuth.instance.currentUser));
+  }
+
+  _setTabSettings() {
     isMenuOpened.value = Get.find<CustomTabController>().isShowed.value;
     Get.find<CustomTabController>().isShowed.listen((p0) {
       isMenuOpened.value = p0;
       printInfo(info: isMenuOpened.value.toString());
     });
-    var details = await FlutterLocalNotificationsPlugin()
-        .getNotificationAppLaunchDetails();
-    if (details!.didNotificationLaunchApp) {
-      if (details.payload != null)
-        {
-          Map<String , dynamic> data = json.decode(details.payload!);
-          if(data['type'] == "chat"){
-            Get.put<ChatController>(ChatController(data["sender id"]));
-            
-          }
-        }
-      else
-        print("hellno0000000000000000 payload null");
-    } else {
-      print("hellnoooooooooooooooooooooooooooo");
-    }
+  }
+
+  // _checkOutNotification() async {
+  //   var details = await FlutterLocalNotificationsPlugin()
+  //       .getNotificationAppLaunchDetails();
+  //   if (details!.didNotificationLaunchApp) {
+  //     if (details.payload != null) {
+  //       Map<String, dynamic> data = json.decode(details.payload!);
+  //       if (data['type'] == "chat") {
+  //         Map<String, dynamic> senderData = json.decode(data['sender data']);
+  //         UserModel _userModel = UserModel.fromJson(senderData);
+
+  //         Get.put<ChatController>(ChatController(senderData["uid"],
+  //             userModel: _userModel, chatId: senderData["chatId"]));
+  //         Get.to(() => ChatScreen());
+  //       }
+  //     } else
+  //       print("hellno0000000000000000 payload null");
+  //   } else {
+  //     print("hellnoooooooooooooooooooooooooooo");
+  //   }
+  // }
+
+  _setOneSignalSettings() async {
     await OneSignal.shared.setExternalUserId(userModel!.id);
     OneSignal.shared.getDeviceState().then((value) {
       FirestoreService.storeOneSignalKey(value!.userId!, userModel!.id);
     });
-  }
-
-  _checkForMessage() async {
-    printInfo(info: "checkForMessage");
-    print("checkForMessage");
-    final RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) {
-      printInfo(info: "initialMessage != null");
-      print("initialMessage != null");
-      final String uid = initialMessage.data['from'];
-      Get.put<ChatController>(ChatController(uid));
-      Get.to(ChatScreen());
-    } else {
-      printInfo(info: "initialMessage is null");
-      print("initialMessage is null");
-    }
   }
 
   _setContacts() {
