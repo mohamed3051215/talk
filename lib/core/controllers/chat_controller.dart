@@ -14,7 +14,7 @@ import 'package:chat_app/core/models/message.dart';
 import 'package:chat_app/core/models/user.dart';
 import 'package:chat_app/core/service/cache_service.dart';
 import 'package:chat_app/core/service/firestore_service.dart';
-import 'package:chat_app/core/service/one_signal_service.dart';
+
 import 'package:chat_app/core/service/storage_service.dart';
 import 'package:chat_app/core/service/user_status_service.dart';
 import 'package:chat_app/view/screens/video_call_screen.dart';
@@ -31,16 +31,16 @@ import 'package:record/record.dart';
 import '../../view/screens/voice_call_screen.dart';
 
 class ChatController extends GetxController {
-  late UserModel userModel;
+  UserModel? userModel;
   RxBool isRecording = false.obs;
   final HomeScreenController homeController = Get.find<HomeScreenController>();
   final String userId;
-  ChatController(this.userId);
+  ChatController(this.userId, {this.userModel, this.chatId});
   RxList<Message> messages = <Message>[].obs;
   final UserStatuesService _userStatuesService = UserStatuesService();
 
   RxBool isSend = false.obs;
-  late String chatId;
+  var chatId;
   final CacheService _cacheService = CacheService();
   // ignore: cancel_subscriptions
   late StreamSubscription messageStream;
@@ -66,11 +66,14 @@ class ChatController extends GetxController {
   }
 
   _setUserModelAndChatId() {
-    ChatContact contact = homeController.contacts
-        .firstWhere((user) => user.contactUser.id == userId);
-    userModel = contact.contactUser;
-    final int index = homeController.contacts.indexOf(contact);
-    chatId = homeController.allUsersChatId[index];
+    if (userModel == null) {
+      ChatContact contact = homeController.contacts
+          .firstWhere((user) => user.contactUser.id == userId);
+      userModel = contact.contactUser;
+      final int index = homeController.contacts.indexOf(contact);
+      chatId = homeController.allUsersChatId[index];
+      printInfo(info: "cantacta is : kj $contact");
+    }
   }
 
   _setMessageController() {
@@ -79,7 +82,7 @@ class ChatController extends GetxController {
 
   RtcEngine get agoraEngine => _agoraEngine;
   _setupActiveStream() {
-    activeStream = _userStatuesService.userStatues(userModel.id);
+    activeStream = _userStatuesService.userStatues(userModel!.id);
   }
 
   _setupMessageStream() async {
@@ -184,14 +187,14 @@ class ChatController extends GetxController {
     });
     final Message message = Message(
         from: Get.find<HomeScreenController>().userModel!.id,
-        to: userModel.id,
+        to: userModel!.id,
         date: dateTime,
         id: messageId,
         text: '',
         type: MessageType.audio,
         link: null);
-    FirestoreService.sendMessage(message, userModel, chatId);
-    OneSignalService().sendMessage(userModel: userModel, message: message);
+    FirestoreService.sendMessage(message, userModel!, chatId);
+    // OneSignalService().sendMessage(userModel: userModel, message: message);
   }
 
   _askForPermissions() async {
@@ -212,10 +215,8 @@ class ChatController extends GetxController {
         text: text,
         date: DateTime.now(),
         from: Get.find<HomeScreenController>().userModel!.id,
-        to: userModel.id);
-    FirestoreService.sendMessage(message, userModel, chatId);
-    await OneSignalService()
-        .sendMessage(userModel: userModel, message: message);
+        to: userModel!.id);
+    FirestoreService.sendMessage(message, userModel!, chatId);
   }
 
   call(CallType type) {
