@@ -49,3 +49,4 @@ app.*.map.json
 # Vscode extenstions related
 /.VSCodeCounter/
 postmanstuff.json
+changeauthor.sh
