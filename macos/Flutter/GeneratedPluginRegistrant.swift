@@ -6,6 +6,8 @@ import FlutterMacOS
 import Foundation
 
 import agora_rtc_engine
+import assets_audio_player
+import assets_audio_player_web
 import audioplayers
 import cloud_firestore
 import firebase_auth
@@ -20,6 +22,8 @@ import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AgoraRtcEnginePlugin.register(with: registry.registrar(forPlugin: "AgoraRtcEnginePlugin"))
+  AssetsAudioPlayerPlugin.register(with: registry.registrar(forPlugin: "AssetsAudioPlayerPlugin"))
+  AssetsAudioPlayerWebPlugin.register(with: registry.registrar(forPlugin: "AssetsAudioPlayerWebPlugin"))
   AudioplayersPlugin.register(with: registry.registrar(forPlugin: "AudioplayersPlugin"))
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))
   FLTFirebaseAuthPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseAuthPlugin"))
