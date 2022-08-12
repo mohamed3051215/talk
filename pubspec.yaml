@@ -36,6 +36,7 @@ dependencies:
   firebase_database: ^9.0.6
   external_path: ^1.0.1
   enx_flutter_plugin: ^2.1.2
+  assets_audio_player: ^3.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
