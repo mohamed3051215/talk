@@ -14,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/constants/fonts.dart';
 import '../../core/controllers/chat_controller.dart';
+import '../../core/models/user.dart';
 import '../widgets/general widgets/circle_button_for_call.dart';
 import '../widgets/general widgets/custom_text.dart';
 import '../widgets/general widgets/logo.dart';
@@ -22,19 +23,24 @@ import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import "package:http/http.dart" as http;
 
 class VideoCallScreen extends StatefulWidget {
-  const VideoCallScreen({Key? key}) : super(key: key);
-
+  const VideoCallScreen(
+      {Key? key, this.userModel, this.channelName2, this.chatId, this.token2})
+      : super(key: key);
+  final UserModel? userModel;
+  final String? channelName2, chatId, token2;
   @override
   State<VideoCallScreen> createState() => _VideoCallScreenState();
 }
 
 class _VideoCallScreenState extends State<VideoCallScreen> {
   late RtcEngine engine;
+
   int? remoteId;
   bool localUserJoined = false, voiceOn = true, videoOn = true;
   String token = "";
   String? channelName;
   final ChatController chatController = Get.find<ChatController>();
+
   @override
   void initState() {
     _initAgora();
@@ -117,7 +123,12 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     await _askForPermissions();
     await _setEngineAndEnableVideo();
     _setAgoraEventHandler();
-
+    if (widget.userModel != null &&
+        widget.chatId != null &&
+        widget.channelName2 != null &&
+        widget.token2 != null) {
+      return _joinRoom({"token": widget.token2, "room": widget.channelName2});
+    }
     final firebaseData = await FirestoreService.getChat(chatController.chatId);
     if (_roomExists(firebaseData)) {
       return _joinRoom(firebaseData);

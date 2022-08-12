@@ -1,20 +1,57 @@
-import 'dart:ui';
-import 'dart:math';
+import 'dart:async';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/view/screens/video_call_screen.dart';
 import 'package:chat_app/view/screens/voice_call_screen.dart';
 import 'package:chat_app/view/widgets/general%20widgets/circle_button_for_call.dart';
 import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:chat_app/view/widgets/general widgets/image_filter.dart';
 import '../../core/constants/colors.dart';
 import '../../core/models/user.dart';
 import '../widgets/general widgets/logo.dart';
+import "package:assets_audio_player/assets_audio_player.dart";
 
-class AcceptAudioCallScreen extends StatelessWidget {
+class AcceptAudioCallScreen extends StatefulWidget {
   final UserModel userModel;
-  const AcceptAudioCallScreen({Key? key, required this.userModel})
+  final String channelName, chatId, token;
+  final bool isBackground;
+  const AcceptAudioCallScreen(
+      {Key? key,
+      required this.userModel,
+      required this.channelName,
+      required this.chatId,
+      required this.token,
+      required this.isBackground})
       : super(key: key);
+
+  @override
+  State<AcceptAudioCallScreen> createState() => _AcceptAudioCallScreenState();
+}
+
+class _AcceptAudioCallScreenState extends State<AcceptAudioCallScreen> {
+  AssetsAudioPlayer player = AssetsAudioPlayer.newPlayer();
+  @override
+  void initState() {
+    super.initState();
+    player.open(
+      Audio("assets/audios/ringtone1.wav"),
+      autoStart: true,
+    );
+
+    Timer.periodic(Duration(seconds: 30), (timer) {
+      if (mounted) {
+        player.stop();
+        timer.cancel();
+        Navigator.pop(context);
+      }
+      timer.cancel();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +67,7 @@ class AcceptAudioCallScreen extends StatelessWidget {
                 width: Get.width,
                 height: Get.height,
                 child: CachedNetworkImage(
-                  imageUrl: userModel.image,
+                  imageUrl: widget.userModel.image,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
@@ -41,7 +78,7 @@ class AcceptAudioCallScreen extends StatelessWidget {
             Align(
                 alignment: Alignment(0, -.5),
                 child: CustomText(
-                    '${userModel.username}\nIs Asking For Audio Call ',
+                    '${widget.userModel.username}\nIs Asking For Video Call ',
                     color: lightPurple,
                     fontSize: 35,
                     maxLines: 3,
@@ -57,7 +94,15 @@ class AcceptAudioCallScreen extends StatelessWidget {
                       CircleButtonForCall(
                         icon: Icons.phone,
                         onPressed: () {
+                          if (widget.isBackground) {
+                            SystemNavigator.pop();
+                            SystemNavigator.pop();
+                            SystemNavigator.pop();
+                            player.stop();
+                            return;
+                          }
                           Navigator.pop(context);
+                          player.stop();
                         },
                         buttonColor: Colors.red,
                         size: 80,
@@ -67,7 +112,13 @@ class AcceptAudioCallScreen extends StatelessWidget {
                       CircleButtonForCall(
                         icon: Icons.phone,
                         onPressed: () {
-                          Get.to(VoiceCallScreen());
+                          player.stop();
+                          Get.off(VoiceCallScreen(
+                            token2: widget.token,
+                            userModel: widget.userModel,
+                            channelName2: widget.channelName,
+                            chatId: widget.chatId,
+                          ));
                         },
                         buttonColor: Colors.green,
                         size: 80,

@@ -13,6 +13,7 @@ import '../../core/constants/colors.dart';
 import '../../core/constants/fonts.dart';
 import '../../core/controllers/chat_controller.dart';
 import '../../core/controllers/home_screen_controller.dart';
+import '../../core/models/user.dart';
 import '../../core/service/firestore_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,8 +22,11 @@ import '../widgets/general widgets/custom_text.dart';
 import '../widgets/general widgets/logo.dart';
 
 class VoiceCallScreen extends StatefulWidget {
-  const VoiceCallScreen({Key? key}) : super(key: key);
-
+  const VoiceCallScreen(
+      {Key? key, this.userModel, this.channelName2, this.chatId, this.token2})
+      : super(key: key);
+  final UserModel? userModel;
+  final String? channelName2, chatId, token2;
   @override
   State<VoiceCallScreen> createState() => _VoiceCallScreenState();
 }
@@ -163,7 +167,12 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
     await _askForPermissions();
     await _setEngineAndEnableAudio();
     _setAgoraEventHandler();
-
+    if (widget.userModel != null &&
+        widget.chatId != null &&
+        widget.channelName2 != null &&
+        widget.token2 != null) {
+      return _joinRoom({"token": widget.token2, "room": widget.channelName2});
+    }
     final firebaseData = await FirestoreService.getChat(_chatController.chatId);
     if (_roomExists(firebaseData)) {
       return _joinRoom(firebaseData);
