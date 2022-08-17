@@ -4,6 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class StorageService {
+  StorageService._privateConstructor();
+  static final StorageService _instance = StorageService._privateConstructor();
+  factory StorageService() => _instance;
+
   Reference storage = FirebaseStorage.instance.ref().child("Users Images");
   Future<String> storeUserImage(String path) async {
     File file = File(path);

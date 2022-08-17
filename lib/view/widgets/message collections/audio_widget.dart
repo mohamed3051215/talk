@@ -5,7 +5,7 @@ import 'package:chat_app/core/constants/colors.dart';
 import 'package:chat_app/core/constants/fonts.dart';
 import 'package:chat_app/core/controllers/home_screen_controller.dart';
 import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/core/service/cache_service.dart';
+import 'package:chat_app/core/service/local_storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
@@ -36,7 +36,7 @@ class _AudioMessageState extends State<AudioMessage>
   bool playing = false;
   final HomeScreenController _homeScreenController =
       Get.find<HomeScreenController>();
-  CacheService _service = CacheService();
+  LocalStorageService _service = LocalStorageService();
   AudioPlayer audioPlayer = AudioPlayer();
 
   bool loading = true;
