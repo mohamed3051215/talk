@@ -12,7 +12,7 @@ import 'package:chat_app/core/helpers/show_error.dart';
 import 'package:chat_app/core/models/contact.dart';
 import 'package:chat_app/core/models/message.dart';
 import 'package:chat_app/core/models/user.dart';
-import 'package:chat_app/core/service/cache_service.dart';
+import 'package:chat_app/core/service/local_storage_service.dart';
 import 'package:chat_app/core/service/firestore_service.dart';
 
 import 'package:chat_app/core/service/storage_service.dart';
@@ -41,7 +41,7 @@ class ChatController extends GetxController {
 
   RxBool isSend = false.obs;
   var chatId;
-  final CacheService _cacheService = CacheService();
+  final LocalStorageService _cacheService = LocalStorageService();
   // ignore: cancel_subscriptions
   late StreamSubscription messageStream;
   final TextEditingController messageController = TextEditingController();
@@ -53,8 +53,9 @@ class ChatController extends GetxController {
   Rx<Duration> duration = Duration(seconds: 0).obs;
   late RtcEngine _agoraEngine;
   RxInt remoteUID = 0.obs;
-  RxBool localUserJoined = false.obs;
+
   Rx<Offset> position = Offset(10, 10).obs;
+  bool isInCall = false;
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -190,6 +191,7 @@ class ChatController extends GetxController {
         to: userModel!.id,
         date: dateTime,
         id: messageId,
+        chatId: chatId,
         text: '',
         type: MessageType.audio,
         link: null);
@@ -213,6 +215,7 @@ class ChatController extends GetxController {
         id: getRandomString(10),
         type: MessageType.text,
         text: text,
+        chatId: chatId,
         date: DateTime.now(),
         from: Get.find<HomeScreenController>().userModel!.id,
         to: userModel!.id);
@@ -223,8 +226,10 @@ class ChatController extends GetxController {
     if (type == CallType.videoCall) {
       Get.to(() => VideoCallScreen());
       printInfo(info: "Started to call");
+      isInCall = true;
     } else if (type == CallType.voiceCall) {
       Get.to(VoiceCallScreen());
+      isInCall = true;
     } else {
       printInfo(info: "Some Error happened #9862");
     }

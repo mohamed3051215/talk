@@ -21,10 +21,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Get.put(HomeScreenController());
-    
+
     return SafeArea(
       child: Scaffold(
-      backgroundColor: bgColor,
+        backgroundColor: bgColor,
         body: Column(
           children: [
             Row(
