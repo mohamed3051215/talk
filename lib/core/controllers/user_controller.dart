@@ -18,14 +18,12 @@ class UserController extends GetxController {
           .doc(user!.uid)
           .get();
       userModel = UserModel(
+          firebaseToken: data.data()!["firebaseToken"] as String,
           id: user!.uid,
           active: true,
-          oneSignalID: data["onesignal id"],
           image: data.data()!['image'],
           phoneNumber: data.data()!['phone'],
           username: data.data()!['username']);
-    }else{
-
-    }
+    } else {}
   }
 }
