@@ -17,6 +17,7 @@ import '../../core/models/user.dart';
 import '../../core/service/firestore_service.dart';
 import 'package:http/http.dart' as http;
 
+import '../../core/service/post_notification_service.dart';
 import '../widgets/general widgets/circle_button_for_call.dart';
 import '../widgets/general widgets/custom_text.dart';
 import '../widgets/general widgets/logo.dart';
@@ -34,10 +35,7 @@ class VoiceCallScreen extends StatefulWidget {
 class _VoiceCallScreenState extends State<VoiceCallScreen> {
   late RtcEngine _engine;
   int? _remoteId;
-  bool _localUserJoined = false,
-      _voiceOn = true,
-      _videoOn = true,
-      _callStarted = false;
+  bool _localUserJoined = false, _voiceOn = true, _callStarted = false;
   String _token = "";
   String? _channelName;
   final ChatController _chatController = Get.find<ChatController>();
@@ -113,7 +111,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       printInfo(info: "local user joined with uid : " + uid.toString());
       setState(() {
         _localUserJoined = true;
-        label = "Waiting for your friend to join...";
+        label = "Ringnig...";
       });
     }, userOffline: (int uid, UserOfflineReason reason) {
       printInfo(
@@ -124,6 +122,11 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         _remoteId = null;
         label = "Your friend left the call...";
       });
+      Future.delayed(Duration(seconds: 1)).then((value) {
+        _callTimer!.cancel();
+        _engine.leaveChannel();
+      });
+
       FirestoreService.clearTokenAndRoomId(chatController.chatId).then((v) {
         Future.delayed(Duration(seconds: 1), () {
           Get.back();
@@ -171,13 +174,24 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         widget.chatId != null &&
         widget.channelName2 != null &&
         widget.token2 != null) {
+      // String token = await updateToken(widget.channelName2!, 0.toString());
       return _joinRoom({"token": widget.token2, "room": widget.channelName2});
     }
     final firebaseData = await FirestoreService.getChat(_chatController.chatId);
     if (_roomExists(firebaseData)) {
       return _joinRoom(firebaseData);
     }
-    _createAndJoinRoom();
+    await _createAndJoinRoom();
+    await _postCallNotification();
+  }
+
+  _postCallNotification() async {
+    await PostNotificationService().postCallNotification(
+        userModel: chatController.userModel!,
+        token: _token,
+        channelName: _channelName!,
+        chatId: chatController.chatId,
+        isVideo: false);
   }
 
   _joinRoom(firebaseData) async {

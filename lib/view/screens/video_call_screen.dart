@@ -7,6 +7,7 @@ import 'package:chat_app/core/constants/agora_keys.dart';
 import 'package:chat_app/core/constants/colors.dart';
 import 'package:chat_app/core/controllers/home_screen_controller.dart';
 import 'package:chat_app/core/service/firestore_service.dart';
+import 'package:chat_app/core/service/post_notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,10 +25,10 @@ import "package:http/http.dart" as http;
 
 class VideoCallScreen extends StatefulWidget {
   const VideoCallScreen(
-      {Key? key, this.userModel, this.channelName2, this.chatId, this.token2})
+      {Key? key, this.userModel, this.channelName, this.chatId, this.token})
       : super(key: key);
   final UserModel? userModel;
-  final String? channelName2, chatId, token2;
+  final String? channelName, chatId, token;
   @override
   State<VideoCallScreen> createState() => _VideoCallScreenState();
 }
@@ -40,12 +41,34 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   String token = "";
   String? channelName;
   final ChatController chatController = Get.find<ChatController>();
-
+  StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>?
+      rejectSubscription;
   @override
   void initState() {
     _initAgora();
     _setTimer();
+    _listenForRejection();
+
     super.initState();
+  }
+
+  _postCallNotification() async {
+    await PostNotificationService().postCallNotification(
+        userModel: chatController.userModel!,
+        token: token,
+        channelName: channelName!,
+        chatId: chatController.chatId,
+        isVideo: true);
+  }
+
+  _listenForRejection() {
+    rejectSubscription =
+        FirestoreService.callRejectionSnapshots(chatId: chatController.chatId)
+            .listen((event) {
+      if (event == "rejected") {
+        Get.back();
+      }
+    });
   }
 
   _setTimer() {
@@ -119,21 +142,23 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     await engine.enableVideo();
   }
 
-  _initAgora() async {
+  Future<void> _initAgora() async {
     await _askForPermissions();
     await _setEngineAndEnableVideo();
     _setAgoraEventHandler();
     if (widget.userModel != null &&
         widget.chatId != null &&
-        widget.channelName2 != null &&
-        widget.token2 != null) {
-      return _joinRoom({"token": widget.token2, "room": widget.channelName2});
+        widget.channelName != null &&
+        widget.token != null) {
+      // String token = await updateToken(widget.channelName2!, 0.toString());
+      return _joinRoom({"token": widget.token, "room": widget.channelName});
     }
     final firebaseData = await FirestoreService.getChat(chatController.chatId);
     if (_roomExists(firebaseData)) {
       return _joinRoom(firebaseData);
     }
-    _createAndJoinRoom();
+    await _createAndJoinRoom();
+    _postCallNotification();
   }
 
   _joinRoom(firebaseData) async {
