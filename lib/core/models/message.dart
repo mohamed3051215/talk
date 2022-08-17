@@ -10,8 +10,10 @@ class Message {
   final String to;
   final MessageType type;
   final String? link;
+  final String chatId;
   Message(
-      {this.link,
+      {required this.chatId,
+      this.link,
       required this.id,
       required this.type,
       required this.text,
@@ -22,23 +24,25 @@ class Message {
   factory Message.fromJson(Map<String, dynamic> data) {
     return Message(
         text: data["text"],
-        date: (data["date"] as Timestamp).toDate(),
+        date: DateTime.parse(data["date"].toString()),
         from: data["from"],
         to: data["to"],
         id: data["id"],
         type: stringToMessageType(data['type']),
-        link: data["type"] == "text" ? null : data["link"]);
+        link: data["type"] == "text" ? null : data["link"],
+        chatId: data["chatId"]);
   }
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {
       "text": text,
-      "date": Timestamp.fromDate(date),
+      "date": date.toIso8601String(),
       "from": from,
       "to": to,
       "id": id,
       "type": messageTypeToString(type),
-      "link": link
+      "link": link,
+      "chatId": chatId,
     };
     return data;
   }

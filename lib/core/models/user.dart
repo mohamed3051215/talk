@@ -1,13 +1,13 @@
 class UserModel {
   final String id;
+  final String firebaseToken;
   final String image;
   final String phoneNumber;
   final String username;
   final bool active;
-  final String? oneSignalID;
   UserModel(
-      {required this.active,
-      required this.oneSignalID,
+      {required this.firebaseToken,
+      required this.active,
       required this.id,
       required this.image,
       required this.phoneNumber,
@@ -16,8 +16,19 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> data)
       : active = data["active"],
         id = data["uid"],
-        oneSignalID = data['onesignal id'],
         image = data["image"],
         phoneNumber = data["phone"],
-        username = data["username"];
+        username = data["username"],
+        firebaseToken = data["firebaseToken"];
+
+  toJson() {
+    return {
+      "active": active,
+      "uid": id,
+      "image": image,
+      "phone": phoneNumber,
+      "firebaseToken": firebaseToken,
+      "username": username
+    };
+  }
 }
