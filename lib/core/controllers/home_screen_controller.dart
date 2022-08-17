@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chat_app/core/controllers/chat_controller.dart';
 import 'package:chat_app/core/controllers/login_controller.dart';
 import 'package:chat_app/core/controllers/profile_controller.dart';
@@ -48,6 +49,25 @@ class HomeScreenController extends GetxController {
     _setUser();
     _setTabSettings();
     await _setOneSignalSettings();
+    _initNotifications();
+  }
+
+  _initNotifications() async {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+      if (!isAllowed) {
+        AwesomeNotifications().requestPermissionToSendNotifications(
+            channelKey: 'basic_channel',
+            permissions: [
+              NotificationPermission.Alert,
+              NotificationPermission.Sound,
+              NotificationPermission.Badge,
+              NotificationPermission.CriticalAlert,
+              NotificationPermission.Provisional,
+              NotificationPermission.FullScreenIntent,
+              NotificationPermission.Vibration
+            ]);
+      }
+    });
   }
 
   logOut() async {
@@ -109,18 +129,18 @@ class HomeScreenController extends GetxController {
       event.docChanges.forEach((e) async {
         final UserModel userModels =
             await FirestoreService.getUserModelFromId(e.doc["uid"]);
-        ChatContact contact =
-            ChatContact(contactUser: userModels, messagesNotSeen: 0);
-        contacts.add(contact);
-        final data = FirebaseFirestore.instance
+        final data = await FirebaseFirestore.instance
             .collection("users")
             .doc(userModel!.id)
             .collection("users")
-            .doc(contact.contactUser.id)
-            .get()
-            .then((data) {
-          allUsersChatId.add(data["chatId"]);
-        });
+            .doc(userModels.id)
+            .get();
+        allUsersChatId.add(data["chatId"]);
+        ChatContact contact = ChatContact(
+            contactUser: userModels,
+            messagesNotSeen: 0,
+            chatId: data["chatId"]);
+        contacts.add(contact);
         activeUsers.add(
             {userModels.id: _userStatuesService.userStatues(userModels.id)});
         update();
