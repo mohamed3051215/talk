@@ -78,9 +78,9 @@ class FirestoreService {
           FirebaseFirestore.instance.collection("users");
       var data = await users.doc(id).get();
       final UserModel _userModel = UserModel(
+          firebaseToken: data["firebaseToken"] as String,
           active: data["active"],
           id: data["uid"],
-          oneSignalID: data['onesignal id'],
           image: data["image"],
           phoneNumber: data["phone"],
           username: data["username"]);
@@ -89,7 +89,7 @@ class FirestoreService {
       showError("User Not Found in firestore service");
       print(e.toString());
       return UserModel(
-          oneSignalID: null,
+          firebaseToken: '',
           active: false,
           id: "",
           image: "",
@@ -155,5 +155,20 @@ class FirestoreService {
         .doc(chatId)
         .update({"token": null, "room": null});
     return;
+  }
+
+  static rejectCall({required String chatId}) async {
+    FirebaseFirestore.instance
+        .collection("chat")
+        .doc(chatId)
+        .update({"rejected": true});
+  }
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> callRejectionSnapshots(
+      {required String chatId}) {
+    return FirebaseFirestore.instance
+        .collection("chat")
+        .doc(chatId)
+        .snapshots();
   }
 }
