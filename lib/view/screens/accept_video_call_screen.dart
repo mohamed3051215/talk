@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/core/controllers/home_screen_controller.dart';
+import 'package:chat_app/core/service/firestore_service.dart';
+import 'package:chat_app/view/screens/home_screen.dart';
 import 'package:chat_app/view/screens/video_call_screen.dart';
 import 'package:chat_app/view/screens/voice_call_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../core/constants/colors.dart';
+import '../../core/controllers/chat_controller.dart';
 import '../../core/models/user.dart';
 import '../widgets/general widgets/circle_button_for_call.dart';
 import '../widgets/general widgets/custom_text.dart';
@@ -44,12 +48,17 @@ class _AcceptVideoCallScreenState extends State<AcceptVideoCallScreen> {
       Audio("assets/audios/ringtone1.wav"),
       autoStart: true,
     );
+    try {
+      Get.find<ChatController>().isInCall = true;
+    } catch (e) {
+      print("Error : " + e.toString());
+    }
 
     Timer.periodic(Duration(seconds: 30), (timer) {
       if (mounted) {
         player.stop();
         timer.cancel();
-        Navigator.pop(context);
+        Get.off(HomeScreen());
       }
       timer.cancel();
     });
@@ -103,7 +112,10 @@ class _AcceptVideoCallScreenState extends State<AcceptVideoCallScreen> {
                         player.stop();
                         return;
                       }
-                      Navigator.pop(context);
+                      player.stop();
+                      Get.offAll(() => HomeScreen());
+
+                      FirestoreService.rejectCall(chatId: widget.chatId);
                     },
                     buttonColor: Colors.red,
                     size: 80,
@@ -113,9 +125,10 @@ class _AcceptVideoCallScreenState extends State<AcceptVideoCallScreen> {
                   CircleButtonForCall(
                     icon: Icons.phone,
                     onPressed: () {
+                      player.stop();
                       Get.off(VideoCallScreen(
-                        channelName2: widget.channelName,
-                        token2: widget.token,
+                        channelName: widget.channelName,
+                        token: widget.token,
                         chatId: widget.chatId,
                         userModel: widget.userModel,
                       ));

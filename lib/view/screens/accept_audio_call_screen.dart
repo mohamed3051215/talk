@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/core/controllers/home_screen_controller.dart';
+import 'package:chat_app/view/screens/home_screen.dart';
 import 'package:chat_app/view/screens/video_call_screen.dart';
 import 'package:chat_app/view/screens/voice_call_screen.dart';
 import 'package:chat_app/view/widgets/general%20widgets/circle_button_for_call.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:chat_app/view/widgets/general widgets/image_filter.dart';
 import '../../core/constants/colors.dart';
+import '../../core/controllers/chat_controller.dart';
 import '../../core/models/user.dart';
 import '../widgets/general widgets/logo.dart';
 import "package:assets_audio_player/assets_audio_player.dart";
@@ -37,16 +40,19 @@ class _AcceptAudioCallScreenState extends State<AcceptAudioCallScreen> {
   @override
   void initState() {
     super.initState();
-    player.open(
-      Audio("assets/audios/ringtone1.wav"),
-      autoStart: true,
-    );
+    player.open(Audio("assets/audios/ringtone1.wav"),
+        autoStart: true, loopMode: LoopMode.single);
+    try {
+      Get.find<ChatController>().isInCall = true;
+    } catch (e) {
+      print("Error : " + e.toString());
+    }
 
     Timer.periodic(Duration(seconds: 30), (timer) {
       if (mounted) {
         player.stop();
         timer.cancel();
-        Navigator.pop(context);
+        Get.off(() => HomeScreen());
       }
       timer.cancel();
     });
@@ -78,7 +84,7 @@ class _AcceptAudioCallScreenState extends State<AcceptAudioCallScreen> {
             Align(
                 alignment: Alignment(0, -.5),
                 child: CustomText(
-                    '${widget.userModel.username}\nIs Asking For Video Call ',
+                    '${widget.userModel.username}\nIs Asking For Audio Call ',
                     color: lightPurple,
                     fontSize: 35,
                     maxLines: 3,
@@ -101,7 +107,8 @@ class _AcceptAudioCallScreenState extends State<AcceptAudioCallScreen> {
                             player.stop();
                             return;
                           }
-                          Navigator.pop(context);
+
+                          Get.offAll(() => HomeScreen());
                           player.stop();
                         },
                         buttonColor: Colors.red,
