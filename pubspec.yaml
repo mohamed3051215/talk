@@ -39,6 +39,7 @@ dependencies:
   assets_audio_player: ^3.0.5
   awesome_notifications: ^0.6.21
   sqflite: ^2.0.3+1
+  media_info: ^0.11.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
