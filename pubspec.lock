@@ -492,6 +492,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4"
+  media_info:
+    dependency: "direct main"
+    description:
+      name: media_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.0"
   meta:
     dependency: transitive
     description:
@@ -499,6 +506,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   octo_image:
     dependency: transitive
     description:
@@ -713,7 +727,7 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2+1"
+    version: "2.0.3+1"
   sqflite_common:
     dependency: transitive
     description:
