@@ -1,7 +1,7 @@
-import 'package:chat_app/core/controllers/tab_controller.dart';
-import 'package:chat_app/core/controllers/user_controller.dart';
-import 'package:chat_app/view/screens/home_screen.dart';
-import 'package:chat_app/view/screens/splash_screen.dart';
+import '../../core/controllers/tab_controller.dart';
+import '../../core/controllers/user_controller.dart';
+import 'home_screen.dart';
+import 'splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

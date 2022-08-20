@@ -1,9 +1,9 @@
-import 'package:chat_app/core/constants/colors.dart';
+import '../../../core/constants/colors.dart';
 
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/view/screens/view_video_screen.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/controllers/home_screen_controller.dart';
+import '../../../core/models/message.dart';
+import '../../screens/view_video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';

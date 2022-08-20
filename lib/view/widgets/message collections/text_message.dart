@@ -1,4 +1,4 @@
-import 'package:chat_app/core/constants/colors.dart';
+import '../../../core/constants/colors.dart';
 // import 'package:chat_app/core/constants/fake_data.dart';
 import 'package:chat_app/core/constants/fonts.dart';
 import 'package:chat_app/core/controllers/home_screen_controller.dart';

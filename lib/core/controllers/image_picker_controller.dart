@@ -1,10 +1,10 @@
-import 'package:chat_app/core/controllers/sign_up_controller.dart';
-import 'package:chat_app/core/controllers/tab_controller.dart';
-import 'package:chat_app/core/service/firestore_service.dart';
-import 'package:chat_app/core/service/storage_service.dart';
-import 'package:chat_app/core/service/user_status_service.dart';
-import 'package:chat_app/view/screens/home_screen.dart';
-import 'package:chat_app/view/widgets/general%20widgets/loading_dialog.dart';
+import 'sign_up_controller.dart';
+import 'tab_controller.dart';
+import '../service/firestore_service.dart';
+import '../service/storage_service.dart';
+import '../service/user_status_service.dart';
+import '../../view/screens/home_screen.dart';
+import '../../view/widgets/general%20widgets/loading_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:chat_app/core/controllers/chat_controller.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/view/screens/accept_audio_call_screen.dart';
-import 'package:chat_app/view/screens/accept_video_call_screen.dart';
-import 'package:chat_app/view/screens/settings_screen.dart';
-import 'package:chat_app/view/screens/voice_call_screen.dart';
+import '../controllers/chat_controller.dart';
+import '../controllers/home_screen_controller.dart';
+import '../../view/screens/accept_audio_call_screen.dart';
+import '../../view/screens/accept_video_call_screen.dart';
+import '../../view/screens/settings_screen.dart';
+import '../../view/screens/voice_call_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

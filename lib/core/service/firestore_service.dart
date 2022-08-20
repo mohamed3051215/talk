@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/controllers/user_controller.dart';
-import 'package:chat_app/core/helpers/show_error.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/core/models/user.dart';
-import 'package:chat_app/core/service/storage_service.dart';
+import '../controllers/home_screen_controller.dart';
+import '../controllers/user_controller.dart';
+import '../helpers/show_error.dart';
+import '../models/message.dart';
+import '../models/user.dart';
+import 'storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -157,11 +157,18 @@ class FirestoreService {
     return;
   }
 
-  static rejectCall({required String chatId}) async {
-    FirebaseFirestore.instance
+  static Future<void> rejectCall({required String chatId}) async {
+    return await FirebaseFirestore.instance
         .collection("chat")
         .doc(chatId)
         .update({"rejected": true});
+  }
+
+  static Future<void> resetCallRejection({required String chatId}) async {
+    return await FirebaseFirestore.instance
+        .collection("chat")
+        .doc(chatId)
+        .update({"rejected": false});
   }
 
   static Stream<DocumentSnapshot<Map<String, dynamic>>> callRejectionSnapshots(

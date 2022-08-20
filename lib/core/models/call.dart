@@ -1,6 +1,6 @@
-import 'package:chat_app/core/enums/call_state.dart';
-import 'package:chat_app/core/models/user.dart';
-import 'package:chat_app/core/service/message_storing_service.dart';
+import '../enums/call_state.dart';
+import 'user.dart';
+import '../service/message_storing_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 

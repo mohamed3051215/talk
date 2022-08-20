@@ -1,6 +1,6 @@
-import 'package:chat_app/core/constants/titles.dart';
-import 'package:chat_app/core/controllers/login_controller.dart';
-import 'package:chat_app/view/screens/login_screen.dart';
+import '../constants/titles.dart';
+import 'login_controller.dart';
+import '../../view/screens/login_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 

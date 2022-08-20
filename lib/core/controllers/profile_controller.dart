@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/helpers/show_error.dart';
-import 'package:chat_app/core/service/firestore_service.dart';
+import 'home_screen_controller.dart';
+import '../helpers/show_error.dart';
+import '../service/firestore_service.dart';
 // import 'package:chat_app/core/service/storage_service.dart';
 import 'package:chat_app/view/widgets/general%20widgets/loading_dialog.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:chat_app/core/constants/colors.dart';
+import '../../../core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class PageCircle extends StatelessWidget {

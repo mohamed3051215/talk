@@ -1,11 +1,11 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/constants/images.dart';
-import 'package:chat_app/core/constants/titles.dart';
-import 'package:chat_app/core/controllers/splash_controller.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
-import 'package:chat_app/view/widgets/general%20widgets/logo.dart';
-import 'package:chat_app/view/widgets/general%20widgets/page_ciew_circle.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/fonts.dart';
+import '../../core/constants/images.dart';
+import '../../core/constants/titles.dart';
+import '../../core/controllers/splash_controller.dart';
+import '../widgets/general%20widgets/custom_text.dart';
+import '../widgets/general%20widgets/logo.dart';
+import '../widgets/general%20widgets/page_ciew_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

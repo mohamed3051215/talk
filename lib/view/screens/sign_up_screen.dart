@@ -1,11 +1,11 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/sign_up_controller.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text_field.dart';
-import 'package:chat_app/view/widgets/general%20widgets/filled_button.dart';
-import 'package:chat_app/view/widgets/general%20widgets/logo.dart';
-import 'package:chat_app/view/widgets/general%20widgets/phone_text_field.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/fonts.dart';
+import '../../core/controllers/sign_up_controller.dart';
+import '../widgets/general%20widgets/custom_text.dart';
+import '../widgets/general%20widgets/custom_text_field.dart';
+import '../widgets/general%20widgets/filled_button.dart';
+import '../widgets/general%20widgets/logo.dart';
+import '../widgets/general%20widgets/phone_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

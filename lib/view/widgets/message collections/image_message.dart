@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/core/constants/colors.dart';
+import '../../../core/constants/colors.dart';
 
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/helpers/random_tag.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/view/screens/view_image_screen.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/controllers/home_screen_controller.dart';
+import '../../../core/helpers/random_tag.dart';
+import '../../../core/models/message.dart';
+import '../../screens/view_image_screen.dart';
+import '../general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,10 +1,10 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/login_controller.dart';
-import 'package:chat_app/core/controllers/sign_up_controller.dart';
-import 'package:chat_app/core/enums/auth_operation.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
-import 'package:chat_app/view/widgets/general%20widgets/logo.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/fonts.dart';
+import '../../core/controllers/login_controller.dart';
+import '../../core/controllers/sign_up_controller.dart';
+import '../../core/enums/auth_operation.dart';
+import '../widgets/general%20widgets/custom_text.dart';
+import '../widgets/general%20widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';

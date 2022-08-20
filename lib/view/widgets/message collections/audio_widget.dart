@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/core/service/local_storage_service.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/controllers/home_screen_controller.dart';
+import '../../../core/models/message.dart';
+import '../../../core/service/local_storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';

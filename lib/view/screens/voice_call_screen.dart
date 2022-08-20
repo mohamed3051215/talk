@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -113,7 +115,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         _localUserJoined = true;
         label = "Ringnig...";
       });
-    }, userOffline: (int uid, UserOfflineReason reason) {
+    }, userOffline: (int uid, UserOfflineReason reason) async {
       printInfo(
           info: "user left call and uid: " +
               uid.toString() +
@@ -122,16 +124,20 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
         _remoteId = null;
         label = "Your friend left the call...";
       });
-      Future.delayed(Duration(seconds: 1)).then((value) {
-        _callTimer!.cancel();
-        _engine.leaveChannel();
-      });
-
-      FirestoreService.clearTokenAndRoomId(chatController.chatId).then((v) {
-        Future.delayed(Duration(seconds: 1), () {
-          Get.back();
-        });
-      });
+      _callTimer!.cancel();
+      _engine.leaveChannel();
+      await FirestoreService.clearTokenAndRoomId(chatController.chatId);
+      AssetsAudioPlayer.newPlayer().open(
+        Audio("assets\\audios\\canceled.mp3"),
+      );
+      if (widget.userModel == null &&
+          widget.token2 == null &&
+          widget.channelName2 == null &&
+          widget.token2 == null) {
+        Get.back();
+      } else {
+        SystemNavigator.pop();
+      }
     }, error: (ErrorCode errorCode) {
       printInfo(
           info:
@@ -182,7 +188,6 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       return _joinRoom(firebaseData);
     }
     await _createAndJoinRoom();
-    await _postCallNotification();
   }
 
   _postCallNotification() async {
@@ -199,6 +204,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
       _channelName = firebaseData['room'];
       _token = firebaseData['token'];
     });
+
     await _engine.leaveChannel();
     await _engine.joinChannel(_token, _channelName!, null, 0);
     return;
@@ -215,6 +221,7 @@ class _VoiceCallScreenState extends State<VoiceCallScreen> {
     setState(() {
       _token = tokens;
     });
+    _postCallNotification();
     await _engine.leaveChannel();
     await _engine.joinChannel(_token, _channelName!, null, 0);
   }

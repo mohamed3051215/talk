@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:chat_app/core/constants/fake_data.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/enums/message_type.dart';
-import 'package:chat_app/core/helpers/generate_random_string.dart';
-import 'package:chat_app/core/models/contact.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/core/service/message_storing_service.dart';
-import 'package:chat_app/view/screens/home_screen.dart';
+import '../../core/constants/fake_data.dart';
+import '../../core/controllers/home_screen_controller.dart';
+import '../../core/enums/message_type.dart';
+import '../../core/helpers/generate_random_string.dart';
+import '../../core/models/contact.dart';
+import '../../core/models/message.dart';
+import '../../core/service/message_storing_service.dart';
+import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

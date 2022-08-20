@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:chat_app/core/bindings/splash_binding.dart';
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/controllers/chat_controller.dart';
+import 'core/bindings/splash_binding.dart';
+import 'core/constants/colors.dart';
+import 'core/controllers/chat_controller.dart';
 
-import 'package:chat_app/core/service/message_storing_service.dart';
-import 'package:chat_app/view/screens/accept_audio_call_screen.dart';
-import 'package:chat_app/view/screens/accept_video_call_screen.dart';
+import 'core/service/message_storing_service.dart';
+import 'view/screens/accept_audio_call_screen.dart';
+import 'view/screens/accept_video_call_screen.dart';
 
-import 'package:chat_app/view/screens/chat_screen.dart';
-import 'package:chat_app/view/screens/voice_call_screen.dart';
+import 'view/screens/chat_screen.dart';
+import 'view/screens/voice_call_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

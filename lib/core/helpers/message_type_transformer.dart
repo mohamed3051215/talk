@@ -1,4 +1,4 @@
-import 'package:chat_app/core/enums/message_type.dart';
+import '../enums/message_type.dart';
 
 String messageTypeToString(MessageType type) {
   switch (type) {

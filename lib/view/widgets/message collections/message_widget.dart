@@ -1,9 +1,9 @@
-import 'package:chat_app/core/enums/message_type.dart';
-import 'package:chat_app/core/models/message.dart';
-import 'package:chat_app/view/widgets/message%20collections/audio_widget.dart';
-import 'package:chat_app/view/widgets/message%20collections/image_message.dart';
-import 'package:chat_app/view/widgets/message%20collections/text_message.dart';
-import 'package:chat_app/view/widgets/message%20collections/video_message.dart';
+import '../../../core/enums/message_type.dart';
+import '../../../core/models/message.dart';
+import '../message%20collections/audio_widget.dart';
+import '../message%20collections/image_message.dart';
+import '../message%20collections/text_message.dart';
+import '../message%20collections/video_message.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

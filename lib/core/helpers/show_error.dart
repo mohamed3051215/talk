@@ -1,5 +1,5 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
+import '../constants/colors.dart';
+import '../../view/widgets/general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

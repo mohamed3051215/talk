@@ -1,7 +1,7 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/controllers/profile_controller.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/controllers/profile_controller.dart';
+import '../general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

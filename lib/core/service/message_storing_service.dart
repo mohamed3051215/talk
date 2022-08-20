@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:chat_app/core/models/contact.dart';
+import '../models/contact.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:get/get.dart';
 

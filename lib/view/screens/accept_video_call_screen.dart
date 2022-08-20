@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/service/firestore_service.dart';
-import 'package:chat_app/view/screens/home_screen.dart';
-import 'package:chat_app/view/screens/video_call_screen.dart';
-import 'package:chat_app/view/screens/voice_call_screen.dart';
+import '../../core/controllers/home_screen_controller.dart';
+import '../../core/service/firestore_service.dart';
+import 'home_screen.dart';
+import 'video_call_screen.dart';
+import 'voice_call_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';

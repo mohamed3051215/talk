@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:chat_app/core/constants/agora_keys.dart';
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/controllers/home_screen_controller.dart';
-import 'package:chat_app/core/service/firestore_service.dart';
-import 'package:chat_app/core/service/post_notification_service.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import '../../core/constants/agora_keys.dart';
+import '../../core/constants/colors.dart';
+import '../../core/controllers/home_screen_controller.dart';
+import '../../core/service/firestore_service.dart';
+import '../../core/service/post_notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,10 +40,13 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   int? remoteId;
   bool localUserJoined = false, voiceOn = true, videoOn = true;
   String token = "";
+  bool entered = false;
   String? channelName;
   final ChatController chatController = Get.find<ChatController>();
   StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>?
       rejectSubscription;
+
+  String _label = "Started to call";
   @override
   void initState() {
     _initAgora();
@@ -64,8 +68,14 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
   _listenForRejection() {
     rejectSubscription =
         FirestoreService.callRejectionSnapshots(chatId: chatController.chatId)
-            .listen((event) {
-      if (event == "rejected") {
+            .listen((event) async {
+      if (event['rejected'] == true) {
+        await FirestoreService.resetCallRejection(
+            chatId: chatController.chatId);
+        setState(() {
+          _label = "Call rejected";
+        });
+        await AssetsAudioPlayer().open(Audio("assets\\audios\\canceled.mp3"));
         Get.back();
       }
     });
@@ -105,12 +115,13 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
               uid.toString());
       setState(() {
         remoteId = uid;
+        _label = "Your friend Joined";
       });
     }, joinChannelSuccess: (String channel, int uid, int elapsed) {
       printInfo(info: "local user joined with uid : " + uid.toString());
       setState(() {
         localUserJoined = true;
-        // remoteId = uid;
+        _label = "Ringing...";
       });
     }, userOffline: (int uid, UserOfflineReason reason) {
       printInfo(
@@ -119,6 +130,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
               "and the reason is ${reason.name}");
       setState(() {
         remoteId = null;
+        _label = "Your friend left";
       });
     }, error: (ErrorCode errorCode) {
       printInfo(
@@ -151,6 +163,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
         widget.channelName != null &&
         widget.token != null) {
       // String token = await updateToken(widget.channelName2!, 0.toString());
+
       return _joinRoom({"token": widget.token, "room": widget.channelName});
     }
     final firebaseData = await FirestoreService.getChat(chatController.chatId);
@@ -158,7 +171,6 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
       return _joinRoom(firebaseData);
     }
     await _createAndJoinRoom();
-    _postCallNotification();
   }
 
   _joinRoom(firebaseData) async {
@@ -183,7 +195,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
     setState(() {
       token = tokens;
     });
-
+    _postCallNotification();
     await engine.leaveChannel();
     await engine.joinChannel(token, channelName!, null, 0);
   }
@@ -246,7 +258,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
               : Align(
                   alignment: Alignment.center,
                   child: CustomText(
-                    "Waiting for your friend to join...",
+                    _label,
                     color: lightPurple,
                     fontSize: 30,
                     maxLines: 3,

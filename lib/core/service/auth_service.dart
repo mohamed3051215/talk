@@ -1,9 +1,9 @@
-import 'package:chat_app/core/controllers/tab_controller.dart';
-import 'package:chat_app/core/controllers/user_controller.dart';
-import 'package:chat_app/core/helpers/show_error.dart';
-import 'package:chat_app/view/screens/home_screen.dart';
-import 'package:chat_app/view/screens/pick_image.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
+import '../controllers/tab_controller.dart';
+import '../controllers/user_controller.dart';
+import '../helpers/show_error.dart';
+import '../../view/screens/home_screen.dart';
+import '../../view/screens/pick_image.dart';
+import '../../view/widgets/general%20widgets/custom_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

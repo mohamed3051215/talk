@@ -1,8 +1,8 @@
-import 'package:chat_app/core/enums/auth_operation.dart';
-import 'package:chat_app/core/service/auth_service.dart';
-import 'package:chat_app/view/screens/login_screen.dart';
-import 'package:chat_app/view/screens/otp_check_screen.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_alert_dialog.dart';
+import '../enums/auth_operation.dart';
+import '../service/auth_service.dart';
+import '../../view/screens/login_screen.dart';
+import '../../view/screens/otp_check_screen.dart';
+import '../../view/widgets/general%20widgets/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

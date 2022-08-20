@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/constants/fonts.dart';
-import 'package:chat_app/core/enums/call_state.dart';
-import 'package:chat_app/core/models/call.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/enums/call_state.dart';
+import '../../../core/models/call.dart';
+import '../general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

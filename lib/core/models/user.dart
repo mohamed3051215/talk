@@ -19,7 +19,7 @@ class UserModel {
         image = data["image"],
         phoneNumber = data["phone"],
         username = data["username"],
-        firebaseToken = data["firebaseToken"];
+        firebaseToken = data["token"];
 
   toJson() {
     return {
@@ -27,7 +27,7 @@ class UserModel {
       "uid": id,
       "image": image,
       "phone": phoneNumber,
-      "firebaseToken": firebaseToken,
+      "token": firebaseToken,
       "username": username
     };
   }

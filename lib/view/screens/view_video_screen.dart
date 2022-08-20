@@ -1,5 +1,5 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
-import 'package:chat_app/core/constants/colors.dart';
+import '../../core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';

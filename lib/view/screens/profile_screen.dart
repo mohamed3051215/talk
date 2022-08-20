@@ -1,15 +1,15 @@
-import 'package:chat_app/core/constants/colors.dart';
-import 'package:chat_app/core/controllers/profile_controller.dart';
-import 'package:chat_app/core/helpers/random_tag.dart';
-import 'package:chat_app/core/models/user.dart';
-import 'package:chat_app/core/service/firestore_service.dart';
-import 'package:chat_app/view/screens/settings_screen.dart';
-import 'package:chat_app/view/screens/view_image_screen.dart';
+import '../../core/constants/colors.dart';
+import '../../core/controllers/profile_controller.dart';
+import '../../core/helpers/random_tag.dart';
+import '../../core/models/user.dart';
+import '../../core/service/firestore_service.dart';
+import 'settings_screen.dart';
+import 'view_image_screen.dart';
 
-import 'package:chat_app/view/widgets/general%20widgets/custom_back_button.dart';
-import 'package:chat_app/view/widgets/general%20widgets/custom_text.dart';
-import 'package:chat_app/view/widgets/general%20widgets/logo.dart';
-import 'package:chat_app/view/widgets/general%20widgets/setting_panel.dart';
+import '../widgets/general%20widgets/custom_back_button.dart';
+import '../widgets/general%20widgets/custom_text.dart';
+import '../widgets/general%20widgets/logo.dart';
+import '../widgets/general%20widgets/setting_panel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

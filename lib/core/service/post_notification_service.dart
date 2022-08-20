@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../models/user.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -39,9 +41,10 @@ class PostNotificationService {
       }
     };
     Uri uri = Uri.parse("https://fcm.googleapis.com/fcm/send");
-    Response response =
+    http.Response response =
         await http.post(uri, headers: _headers, body: json.encode(data));
     Map<String, dynamic> responseBody = json.decode(response.body);
+    printInfo(info: "post notifcation body is : " + responseBody.toString());
     if (responseBody["success"] == 1) {
       return true;
     } else {
