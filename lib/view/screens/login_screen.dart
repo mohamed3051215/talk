@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 17,
                   ),
-                  FilledButton(
+                  CustomFilledButton(
                       onPressed: () => controller.login(), text: "login"),
                   SizedBox(
                     height: 17,

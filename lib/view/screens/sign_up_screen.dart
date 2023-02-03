@@ -70,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(
                     height: 17,
                   ),
-                  FilledButton(
+                  CustomFilledButton(
                       onPressed: () => controller.signUp(), text: "SignUp"),
                   SizedBox(
                     height: 17,

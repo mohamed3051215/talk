@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'custom_text.dart';
 
-class FilledButton extends StatelessWidget {
-  const FilledButton(
+class CustomFilledButton extends StatelessWidget {
+  const CustomFilledButton(
       {Key? key,
       required this.text,
       this.width = 100,
