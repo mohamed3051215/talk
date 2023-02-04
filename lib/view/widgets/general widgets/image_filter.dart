@@ -1,8 +1,6 @@
 // Got this code from https://stackoverflow.com/a/64763333/18190914
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../core/helpers/color_filter_gen.dart';
 

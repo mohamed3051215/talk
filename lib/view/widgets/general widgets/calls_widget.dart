@@ -1,16 +1,15 @@
 import 'dart:math';
 
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/fonts.dart';
-import '../../../core/enums/call_state.dart';
-import '../../../core/models/call.dart';
-import '../general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../core/constants/colors.dart';
 import '../../../core/constants/fake_data.dart';
-import 'custom_text.dart';
+import '../../../core/constants/fonts.dart';
+import '../../../core/enums/call_state.dart';
+import '../../../core/models/call.dart';
+import '../general%20widgets/custom_text.dart';
 
 class CallWidget extends StatelessWidget {
   const CallWidget({Key? key, required this.call}) : super(key: key);

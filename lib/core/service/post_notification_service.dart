@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 import '../constants/firebase_messaging_key.dart';
 import '../models/user.dart';
-import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
 
 class PostNotificationService {
   PostNotificationService._privateConstructor();
@@ -13,8 +12,7 @@ class PostNotificationService {
   factory PostNotificationService() => _instance;
   final Map<String, String> _headers = {
     "Content-Type": "application/json",
-    "Authorization":
-        "key=${firebaseMessagingKey}"
+    "Authorization": "key=${firebaseMessagingKey}"
   };
   Future<bool> postCallNotification(
       {required UserModel userModel,

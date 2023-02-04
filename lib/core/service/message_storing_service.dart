@@ -1,12 +1,8 @@
-import 'dart:io';
-import 'dart:math';
-
-import '../models/contact.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:get/get.dart';
+import 'package:sqflite/sqflite.dart';
 
-import '../constants/fake_data.dart';
 import '../models/call.dart';
+import '../models/contact.dart';
 import '../models/message.dart';
 import '../models/user.dart';
 

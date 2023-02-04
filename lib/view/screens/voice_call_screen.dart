@@ -4,21 +4,18 @@ import 'dart:math';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/constants/agora_keys.dart';
 import '../../core/constants/colors.dart';
-import '../../core/constants/fonts.dart';
 import '../../core/controllers/chat_controller.dart';
 import '../../core/controllers/home_screen_controller.dart';
 import '../../core/models/user.dart';
 import '../../core/service/firestore_service.dart';
-import 'package:http/http.dart' as http;
-
 import '../../core/service/post_notification_service.dart';
 import '../widgets/general widgets/circle_button_for_call.dart';
 import '../widgets/general widgets/custom_text.dart';

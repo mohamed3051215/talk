@@ -1,6 +1,5 @@
 import '../enums/message_type.dart';
 import '../helpers/message_type_transformer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Message {
   final String text;

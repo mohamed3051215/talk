@@ -1,29 +1,25 @@
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'chat_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import '../../view/screens/login_screen.dart';
+import '../../view/screens/profile_screen.dart';
+import '../../view/screens/settings_screen.dart';
+import '../models/contact.dart';
+import '../models/user.dart';
+import '../service/firestore_service.dart';
+import '../service/user_status_service.dart';
 import 'login_controller.dart';
 import 'profile_controller.dart';
 import 'tab_controller.dart';
 import 'user_controller.dart';
-import '../models/contact.dart';
-import '../models/user.dart';
-import '../service/firebase_messaging_service.dart';
-import '../service/firestore_service.dart';
-import '../service/user_status_service.dart';
-import '../../view/screens/chat_screen.dart';
-import '../../view/screens/login_screen.dart';
-import '../../view/screens/profile_screen.dart';
-import '../../view/screens/settings_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreenController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;

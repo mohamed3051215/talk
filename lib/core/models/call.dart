@@ -1,8 +1,5 @@
 import '../enums/call_state.dart';
 import 'user.dart';
-import '../service/message_storing_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 class Call {
   final UserModel from;

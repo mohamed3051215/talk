@@ -1,17 +1,12 @@
-import 'dart:math';
+import 'package:flutter/material.dart';
 
+import '../../core/constants/colors.dart';
 import '../../core/constants/fake_data.dart';
-import '../../core/controllers/home_screen_controller.dart';
 import '../../core/enums/message_type.dart';
 import '../../core/helpers/generate_random_string.dart';
 import '../../core/models/contact.dart';
 import '../../core/models/message.dart';
 import '../../core/service/message_storing_service.dart';
-import 'home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../core/constants/colors.dart';
 import '../widgets/general widgets/custom_text.dart';
 
 class SettingsScreen extends StatelessWidget {

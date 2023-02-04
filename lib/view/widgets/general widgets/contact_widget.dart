@@ -1,3 +1,7 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/fonts.dart';
 import '../../../core/controllers/chat_controller.dart';
@@ -6,10 +10,6 @@ import '../../../core/models/contact.dart';
 import '../../../core/models/user.dart';
 import '../../screens/chat_screen.dart';
 import '../general%20widgets/custom_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ContactWidget extends StatelessWidget {
   final ChatContact contact;

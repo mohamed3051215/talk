@@ -1,23 +1,21 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
+import "package:assets_audio_player/assets_audio_player.dart";
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../core/controllers/home_screen_controller.dart';
-import 'home_screen.dart';
-import 'video_call_screen.dart';
-import 'voice_call_screen.dart';
-import '../widgets/general%20widgets/circle_button_for_call.dart';
-import '../widgets/general%20widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../widgets/general widgets/image_filter.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/controllers/chat_controller.dart';
 import '../../core/models/user.dart';
 import '../../core/service/firestore_service.dart';
+import '../widgets/general widgets/image_filter.dart';
 import '../widgets/general widgets/logo.dart';
-import "package:assets_audio_player/assets_audio_player.dart";
+import '../widgets/general%20widgets/circle_button_for_call.dart';
+import '../widgets/general%20widgets/custom_text.dart';
+import 'home_screen.dart';
+import 'voice_call_screen.dart';
 
 class AcceptAudioCallScreen extends StatefulWidget {
   final UserModel userModel;

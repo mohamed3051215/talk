@@ -2,29 +2,22 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'core/bindings/splash_binding.dart';
-import 'core/constants/colors.dart';
-import 'core/controllers/chat_controller.dart';
-
-import 'core/service/message_storing_service.dart';
-import 'view/screens/accept_audio_call_screen.dart';
-import 'view/screens/accept_video_call_screen.dart';
-
-import 'view/screens/chat_screen.dart';
-import 'view/screens/voice_call_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+
+import 'core/bindings/splash_binding.dart';
+import 'core/constants/colors.dart';
+import 'core/controllers/chat_controller.dart';
 import 'core/controllers/tab_controller.dart';
 import 'core/models/user.dart';
-import 'core/service/firebase_messaging_service.dart';
 import 'core/service/firebase_messaging_service_awesom_notification.dart';
+import 'core/service/message_storing_service.dart';
 import 'view/screens/controlling_screen.dart';
-
 import 'view/screens/video_call_screen.dart';
+import 'view/screens/voice_call_screen.dart';
 
 late StreamSubscription<ReceivedAction> _actionStreamSubscription;
 void main() async {

@@ -1,10 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
-import '../constants/agora_keys.dart';
-import 'home_screen_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
+import 'package:permission_handler/permission_handler.dart';
+import 'package:record/record.dart';
+
+import '../../view/screens/video_call_screen.dart';
+import '../../view/screens/voice_call_screen.dart';
 import '../enums/call_type.dart';
 import '../enums/message_type.dart';
 import '../helpers/random_tag.dart';
@@ -12,23 +19,11 @@ import '../helpers/show_error.dart';
 import '../models/contact.dart';
 import '../models/message.dart';
 import '../models/user.dart';
-import '../service/local_storage_service.dart';
 import '../service/firestore_service.dart';
-
+import '../service/local_storage_service.dart';
 import '../service/storage_service.dart';
 import '../service/user_status_service.dart';
-import '../../view/screens/video_call_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:permission_handler/permission_handler.dart' as ph;
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:record/record.dart';
-
-import '../../view/screens/voice_call_screen.dart';
+import 'home_screen_controller.dart';
 
 class ChatController extends GetxController {
   UserModel? userModel;

@@ -2,21 +2,14 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import '../controllers/chat_controller.dart';
-import '../controllers/home_screen_controller.dart';
-import '../../view/screens/accept_audio_call_screen.dart';
-import '../../view/screens/accept_video_call_screen.dart';
-import '../../view/screens/settings_screen.dart';
-import '../../view/screens/voice_call_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import '../../main.dart';
-import '../../view/screens/chat_screen.dart';
-import '../../view/screens/home_screen.dart';
+
+import '../../view/screens/accept_audio_call_screen.dart';
+import '../../view/screens/accept_video_call_screen.dart';
+import '../controllers/chat_controller.dart';
 import '../models/user.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
