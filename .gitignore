@@ -55,3 +55,6 @@ changeauthor.sh
 lib/core/constants/agora_keys.dart
 lib/core/constants/one_signal_keys.dart
 lib/core/constants/firebase_messaging_key.dart
+
+# personal files
+TODOS.txt
