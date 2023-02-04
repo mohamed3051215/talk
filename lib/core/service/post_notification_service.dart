@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../constants/firebase_messaging_key.dart';
 import '../models/user.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,7 @@ class PostNotificationService {
   final Map<String, String> _headers = {
     "Content-Type": "application/json",
     "Authorization":
-        "key=AAAAGZxZycU:APA91bE3iUFN5U6gsuf8BfP4gWsA0yVQFGhgZohdBk7vJUoCR4woJBs3hXxweg43cjFgpw4SYgu3oeqbxCCfTxgZq5p6cM-_cbYSHQqv9zSDgFRB2-nCBd7qKMAH6ZDuedmW4zzVcoB-"
+        "key=${firebaseMessagingKey}"
   };
   Future<bool> postCallNotification(
       {required UserModel userModel,
