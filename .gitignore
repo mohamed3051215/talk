@@ -50,3 +50,8 @@ app.*.map.json
 /.VSCodeCounter/
 postmanstuff.json
 changeauthor.sh
+
+# keys and private data 
+lib/core/constants/agora_keys.dart
+lib/core/constants/one_signal_keys.dart
+lib/core/constants/firebase_messaging_key.dart
