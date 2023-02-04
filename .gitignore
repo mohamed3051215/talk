@@ -50,7 +50,7 @@ app.*.map.json
 /.VSCodeCounter/
 postmanstuff.json
 changeauthor.sh
-
+.vscode/
 # keys and private data 
 lib/core/constants/agora_keys.dart
 lib/core/constants/one_signal_keys.dart
